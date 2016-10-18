@@ -50,9 +50,14 @@ function componentFactory (Component, options) {
   // find super
   var superProto = Object.getPrototypeOf(Component.prototype)
   var Super = superProto instanceof Vue
-    ? superProto.constructor
-    : Vue
-  return Super.extend(options)
+      ? superProto.constructor
+      : null;
+
+  if(Super){
+    return Super.extend(options);
+  }
+
+  return options;
 }
 
 function decorator (options) {
